@@ -3,7 +3,7 @@ body {
 }
 
 .sticker {
-    background: #d287d1;
+    background: #ffffff;
     min-height: 100px;
     min-width: 100px;
     position: absolute;
@@ -32,4 +32,10 @@ body {
 
 .sticker .bar:hover {
     cursor: move;
+    background: #d0bdbd;
+}
+
+.sticker:hover {
+    /*element on mouse will be up*/
+    z-index: 1;
 }

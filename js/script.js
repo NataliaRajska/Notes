@@ -1,14 +1,14 @@
 (function () {
     'use strict';
 
-    let draggedEl;
-    let onDragStart;
-    let onDrag;
-    let onDragEnd;
-    let grabPointX;
-    let grabPointY;
-    let createNote;
-    let addNoteBtnEL;
+    let draggedEl,
+        onDragStart,
+        onDrag,
+        onDragEnd,
+        grabPointX,
+        grabPointY,
+        createNote,
+        addNoteBtnEL;
 
 
     onDragStart = function (ev) {
