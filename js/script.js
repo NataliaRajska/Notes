@@ -8,7 +8,9 @@
         grabPointX,
         grabPointY,
         createNote,
-        addNoteBtnEL;
+        addNoteBtnEL,
+        init;
+
 
 
     onDragStart = function (ev) {
@@ -72,11 +74,15 @@
         document.body.appendChild(stickerEL);
     };
 
-    createNote();
 
-    addNoteBtnEL = document.querySelector('.addNoteBtn');
-    addNoteBtnEL.addEventListener('click', createNote, false);
+    init = function(){
+        addNoteBtnEL = document.querySelector('.addNoteBtn');
+        addNoteBtnEL.addEventListener('click', createNote, false);
 
-    document.addEventListener('mousemove', onDrag, false);
-    document.addEventListener('mouseup', onDragEnd, false);
+        document.addEventListener('mousemove', onDrag, false);
+        document.addEventListener('mouseup', onDragEnd, false);
+    };
+
+    init();
+    // createNote();
 })();
