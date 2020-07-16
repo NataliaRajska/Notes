@@ -9,8 +9,11 @@
         grabPointY,
         createNote,
         addNoteBtnEL,
-        init;
-
+        init,
+        testLocalStorage,
+        saveNote,
+        deleteNote,
+        loadNotes;
 
 
     onDragStart = function (ev) {
@@ -74,14 +77,40 @@
         document.body.appendChild(stickerEL);
     };
 
+    testLocalStorage = function () {
+        var foo = 'foo';
+        try {
+            localStorage.setItem(foo, foo);
+            localStorage.removeItem(foo);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
 
-    init = function(){
+    init = function () {
+        if (!testLocalStorage()) {
+            const message = "Sorry you can't use localStorage";
+        } else {
+            saveNote = function (note) {
+                //Here we save note
+            };
+            deleteNote = function () {
+                //Here we delete note
+            };
+            loadNotes = function () {
+                //Here we delete note
+            };
+
+        }
+
         addNoteBtnEL = document.querySelector('.addNoteBtn');
         addNoteBtnEL.addEventListener('click', createNote, false);
 
         document.addEventListener('mousemove', onDrag, false);
         document.addEventListener('mouseup', onDragEnd, false);
     };
+
 
     init();
     // createNote();
