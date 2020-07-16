@@ -1,16 +1,35 @@
-.card {
+body {
+    background: bisque;
+}
+
+.sticker {
+    background: #d287d1;
+    min-height: 100px;
+    min-width: 100px;
+    position: absolute;
+    left:0;
+    top:0;
+    border: 1px solid #6495ed;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+
+.sticker .bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2em;
+    background: #d4a5ae;
+    width: 100%;
+}
+.sticker textarea {
+    padding: 3px 10px;
+    box-sizing: border-box;
+    min-height: 100px;
+    min-width: 100px;
+    background: transparent;
     border: none;
 }
 
-.card-body {
-    background-color: #F8F9FA
-}
-
-.edit {
-    margin: 0;
-    display: inline-block;
-}
-
-#deleteAll #notesView {
-    float: right;
+.sticker .bar:hover {
+    cursor: move;
 }
