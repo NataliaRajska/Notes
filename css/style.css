@@ -1,0 +1,16 @@
+.card {
+    border: none;
+}
+
+.card-body {
+    background-color: #F8F9FA
+}
+
+.edit {
+    margin: 0;
+    display: inline-block;
+}
+
+#deleteAll #notesView {
+    float: right;
+}
