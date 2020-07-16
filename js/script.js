@@ -1,6 +1,5 @@
-
 (function () {
-'use strict';
+    'use strict';
 
     let draggedEl;
     let onDragStart;
@@ -9,66 +8,75 @@
     let grabPointX;
     let grabPointY;
     let createNote;
+    let addNoteBtnEL;
 
 
     onDragStart = function (ev) {
-    let boundingClientRect;
-    //move by bar
-    if (ev.target.className.indexOf('bar') === -1){
-        return;
-    }
+        let boundingClientRect;
+        //move by bar
+        if (ev.target.className.indexOf('bar') === -1) {
+            return;
+        }
 
-    draggedEl = this;
+        draggedEl = this;
 
-    boundingClientRect = draggedEl.getBoundingClientRect();
+        boundingClientRect = draggedEl.getBoundingClientRect();
 
-    grabPointX = boundingClientRect.left - ev.clientX;
-    grabPointY = boundingClientRect.top - ev.clientY;
-};
+        grabPointX = boundingClientRect.left - ev.clientX;
+        grabPointY = boundingClientRect.top - ev.clientY;
+    };
 
-onDrag =function (event) {
-    if (!draggedEl) {
-        return;
-    }
+    onDrag = function (event) {
+        if (!draggedEl) {
+            return;
+        }
 
-    let posX = event.clientX + grabPointX;
-    let posY = event.clientY + grabPointY;
+        let posX = event.clientX + grabPointX;
+        let posY = event.clientY + grabPointY;
 
-    //can't moves bound of left and up side
-    if (posX < 0) {
-        posX = 0;
-    }
-    if (posY < 0) {
-        posY = 0;
-    }
+        //can't moves bound of left and up side
+        if (posX < 0) {
+            posX = 0;
+        }
 
-    draggedEl.style.transform = "translateX(" +posX + "px)translateY(" + posY + "px)";
-};
+        if (posY < 0) {
+            posY = 0;
+        }
 
-onDragEnd = function (){
-    draggedEl = null;
-    grabPointY = null;
-    grabPointX = null;
-};
+        draggedEl.style.transform = "translateX(" + posX + "px)translateY(" + posY + "px)";
+    };
 
-createNote = function (){
-    const stickerEL = document.createElement('div'),
-        barEl = document.createElement('div'),
-        textareaEl = document.createElement('textarea');
+    onDragEnd = function () {
+        draggedEl = null;
+        grabPointY = null;
+        grabPointX = null;
+    };
 
-    // name for class
-    barEl.classList.add('bar');
-    stickerEL.classList.add('sticker');
+    createNote = function () {
+        const stickerEL = document.createElement('div'),
+            barEl = document.createElement('div'),
+            textareaEl = document.createElement('textarea');
 
-    stickerEL.appendChild(barEl);
-    stickerEL.appendChild(textareaEl);
+        const transformCSSValue = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
+        stickerEL.transform = transformCSSValue;
 
-    stickerEL.addEventListener('mousedown', onDragStart, false);
 
-    document.body.appendChild(stickerEL);
-};
+        // name for class
+        barEl.classList.add('bar');
+        stickerEL.classList.add('sticker');
 
-createNote();
+        stickerEL.appendChild(barEl);
+        stickerEL.appendChild(textareaEl);
+
+        stickerEL.addEventListener('mousedown', onDragStart, false);
+
+        document.body.appendChild(stickerEL);
+    };
+
+    createNote();
+
+    addNoteBtnEL = document.querySelector('.addNoteBtn');
+    addNoteBtnEL.addEventListener('click', createNote, false);
 
     document.addEventListener('mousemove', onDrag, false);
     document.addEventListener('mouseup', onDragEnd, false);
