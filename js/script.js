@@ -57,8 +57,7 @@
             barEl = document.createElement('div'),
             textareaEl = document.createElement('textarea');
 
-        const transformCSSValue = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
-        stickerEL.transform = transformCSSValue;
+        stickerEL.transform = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
 
 
         // name for class
