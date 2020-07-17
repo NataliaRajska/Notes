@@ -60,7 +60,28 @@
     createNote = function () {
         const stickerEL = document.createElement('div'),
             barEl = document.createElement('div'),
-            textareaEl = document.createElement('textarea');
+            textareaEl = document.createElement('textarea'),
+            saveBtnEl = document.createElement('button'),
+            deleteBtnEl = document.createElement('button');
+        let onSave, onDelete;
+
+        onDelete = function(){
+            const obj = {};
+            deleteNote(obj);
+        };
+
+        onSave= function(){
+            const obj = {};
+            saveNote(obj);
+        };
+
+        deleteBtnEl.addEventListener('click', onDelete);
+        saveBtnEl.addEventListener('click', onSave);
+
+        //for stylesheet
+        saveBtnEl.classList.add('saveButton');
+        deleteBtnEl.classList.add('deleteButton');
+
 
         stickerEL.transform = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
 
@@ -68,6 +89,9 @@
         // name for class
         barEl.classList.add('bar');
         stickerEL.classList.add('sticker');
+
+        barEl.appendChild(saveBtnEl);
+        barEl.appendChild(deleteBtnEl);
 
         stickerEL.appendChild(barEl);
         stickerEL.appendChild(textareaEl);
@@ -78,7 +102,7 @@
     };
 
     testLocalStorage = function () {
-        var foo = 'foo';
+        const foo = 'foo';
         try {
             localStorage.setItem(foo, foo);
             localStorage.removeItem(foo);
