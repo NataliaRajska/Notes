@@ -70,7 +70,7 @@
             transformCSSValue: el.style.transform
         };
     };
-    //with parameter will be call in loadNotes without paramater will be call on click
+    //with parameter will be call in loadNotes without parameter will be call on click
     createNote = function (options) {
         const stickerEL = document.createElement('div'),
             barEl = document.createElement('div'),
@@ -148,7 +148,9 @@
                 //Here we delete note
             };
             loadNotes = function () {
-                //Here we delete note
+            for(let i=0; i< localStorage.length;i++){
+                console.log(localStorage.key(i));
+            }
             };
 
         }
