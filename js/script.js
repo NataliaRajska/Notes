@@ -67,7 +67,12 @@
             //key for localStorage
             id: el.id,
             //note position
-            transformCSSValue: el.style.transform
+            transformCSSValue: el.style.transform,
+            //sizing style
+            textarea: {
+                width: textarea.style.width,
+                height: textarea.style.height
+            }
         };
     };
     //with parameter will be call in loadNotes without parameter will be call on click
@@ -93,6 +98,13 @@
         onSave = function () {
             saveNote(getNoteObject(stickerEL));
         };
+
+        if (noteConfig.textarea) {
+            textareaEl.style.width = noteConfig.style.width;
+            textareaEl.style.height = noteConfig.style.height;
+            //after saving you can't resizing note
+            textareaEl.style.resize = 'none';
+        }
 
         stickerEL.id = noteConfig.id;
         textareaEl.value = noteConfig.content;
@@ -142,14 +154,16 @@
             const message = "Sorry you can't use localStorage";
         } else {
             saveNote = function (note) {
-                localStorage.setItem(note.id, note);
+                localStorage.setItem(note.id, JSON.stringify(note));
             };
             deleteNote = function () {
                 //Here we delete note
             };
             loadNotes = function () {
             for(let i=0; i< localStorage.length;i++){
+                const noteObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
                 console.log(localStorage.key(i));
+                createNote(noteObject);
             }
             };
 
