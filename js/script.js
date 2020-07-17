@@ -69,14 +69,20 @@
             transformCSSValue: el.style.transform
         };
     };
-
-    createNote = function () {
+    //with parameter will be call in loadNotes without paramater will be call on click
+    createNote = function (options) {
         const stickerEL = document.createElement('div'),
             barEl = document.createElement('div'),
             textareaEl = document.createElement('textarea'),
             saveBtnEl = document.createElement('button'),
             deleteBtnEl = document.createElement('button');
-        let onSave, onDelete;
+            let onSave, onDelete,
+            BOUNDARIES =400,
+        noteConfig = options || {
+            content: '',
+            id:"sticker_" + new Date().getTime(),
+            transformCSSValue: "translateX(" + Math.random() + BOUNDARIES + "px) translateY(" + Math.random() + BOUNDARIES + "px)";
+        };
 
         onDelete = function () {
             const obj = {};
@@ -94,6 +100,7 @@
         saveBtnEl.classList.add('saveButton');
         deleteBtnEl.classList.add('deleteButton');
 
+        const transformCSSValue = noteConfig.transformCSSValue;
 
         stickerEL.transform = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
 
