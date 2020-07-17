@@ -149,24 +149,36 @@
         createNote();
     };
 
+
+
     init = function () {
         if (!testLocalStorage()) {
             const message = "Sorry you can't use localStorage";
+
+            saveNote = function () {
+                console.warn(message);
+            }
+
+            deleteNote = function () {
+                console.warn(message);
+            }
+
+
         } else {
             saveNote = function (note) {
                 localStorage.setItem(note.id, JSON.stringify(note));
             };
             deleteNote = function (note) {
-            localStorage.removeItem(note.id);
+                localStorage.removeItem(note.id);
             };
             loadNotes = function () {
-            for(let i=0; i< localStorage.length;i++){
-                const noteObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-                console.log(localStorage.key(i));
-                createNote(noteObject);
-            }
+                for (let i = 0; i < localStorage.length; i++) {
+                    const noteObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                    console.log(localStorage.key(i));
+                    createNote(noteObject);
+                }
             };
-
+            loadNotes();
         }
 
         addNoteBtnEL = document.querySelector('.addNoteBtn');
