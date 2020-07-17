@@ -13,7 +13,8 @@
         testLocalStorage,
         saveNote,
         deleteNote,
-        loadNotes;
+        loadNotes,
+        getNoteObject;
 
 
     onDragStart = function (ev) {
@@ -57,6 +58,18 @@
         grabPointX = null;
     };
 
+    getNoteObject = function (el) {
+        const textarea = el.querySelector('textarea');
+        return {
+            //field:
+            content: textarea.value,
+            //key for localStorage
+            id: el.id,
+            //note position
+            transformCSSValue: el.style.transform
+        };
+    };
+
     createNote = function () {
         const stickerEL = document.createElement('div'),
             barEl = document.createElement('div'),
@@ -65,14 +78,13 @@
             deleteBtnEl = document.createElement('button');
         let onSave, onDelete;
 
-        onDelete = function(){
+        onDelete = function () {
             const obj = {};
             deleteNote(obj);
         };
 
-        onSave= function(){
-            const obj = {};
-            saveNote(obj);
+        onSave = function () {
+            saveNote(getNoteObject(stickerEL));
         };
 
         deleteBtnEl.addEventListener('click', onDelete);
@@ -117,7 +129,7 @@
             const message = "Sorry you can't use localStorage";
         } else {
             saveNote = function (note) {
-                //Here we save note
+                localStorage.setItem(note.id, note);
             };
             deleteNote = function () {
                 //Here we delete note
