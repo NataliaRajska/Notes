@@ -14,7 +14,8 @@
         saveNote,
         deleteNote,
         loadNotes,
-        getNoteObject;
+        getNoteObject,
+        onAddNoteBtnClick;
 
 
     onDragStart = function (ev) {
@@ -77,11 +78,11 @@
             saveBtnEl = document.createElement('button'),
             deleteBtnEl = document.createElement('button');
             let onSave, onDelete,
-            BOUNDARIES =400,
-        noteConfig = options || {
+            BOUNDARIES = 400,
+            noteConfig = options || {
             content: '',
             id:"sticker_" + new Date().getTime(),
-            transformCSSValue: "translateX(" + Math.random() + BOUNDARIES + "px) translateY(" + Math.random() + BOUNDARIES + "px)";
+            transformCSSValue: "translateX(" + Math.random() + BOUNDARIES + "px) translateY(" + Math.random() + BOUNDARIES + "px)"
         };
 
         onDelete = function () {
@@ -93,6 +94,9 @@
             saveNote(getNoteObject(stickerEL));
         };
 
+        stickerEL.id = noteConfig.id;
+        textareaEl.value = noteConfig.content;
+
         deleteBtnEl.addEventListener('click', onDelete);
         saveBtnEl.addEventListener('click', onSave);
 
@@ -100,9 +104,7 @@
         saveBtnEl.classList.add('saveButton');
         deleteBtnEl.classList.add('deleteButton');
 
-        const transformCSSValue = noteConfig.transformCSSValue;
-
-        stickerEL.transform = "translateX(" + Math.random() + 400 + "px) translateY(" + Math.random() + 400 + "px)";
+        stickerEL.transform = noteConfig.transformCSSValue;
 
 
         // name for class
@@ -131,6 +133,10 @@
         }
     };
 
+    onAddNoteBtnClick =function(){
+        createNote();
+    };
+
     init = function () {
         if (!testLocalStorage()) {
             const message = "Sorry you can't use localStorage";
@@ -148,7 +154,7 @@
         }
 
         addNoteBtnEL = document.querySelector('.addNoteBtn');
-        addNoteBtnEL.addEventListener('click', createNote, false);
+        addNoteBtnEL.addEventListener('click', onAddNoteBtnClick, false);
 
         document.addEventListener('mousemove', onDrag, false);
         document.addEventListener('mouseup', onDragEnd, false);
